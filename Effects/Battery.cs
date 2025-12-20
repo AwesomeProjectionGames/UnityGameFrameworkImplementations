@@ -9,7 +9,20 @@ namespace GameFramework.Spectating
     /// </summary>
     public class Battery : IBattery
     {
-        public float MaxCapacity { get; }
+        private float _maxCapacity;
+
+        public float MaxCapacity
+        {
+            get => _maxCapacity;
+            set
+            {
+                if (value <= 0f)
+                    throw new ArgumentOutOfRangeException(nameof(value), "MaxCapacity must be greater than zero.");
+
+                _maxCapacity = value;
+                CurrentCharge = Clamp(CurrentCharge, 0f, _maxCapacity);
+            }
+        }
 
         public float CurrentCharge { get; private set; }
 
