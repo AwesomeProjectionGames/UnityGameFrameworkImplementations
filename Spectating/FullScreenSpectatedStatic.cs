@@ -1,8 +1,9 @@
 ﻿#nullable enable
 
+using AwesomeProjectionCoreUtils.Extensions;
 using UnityEngine;
 
-namespace GameFramework.POV
+namespace GameFramework.Spectating
 {
     /// <summary>
     /// A simple ISpectate implementation for static objects in full screen.
@@ -16,7 +17,14 @@ namespace GameFramework.POV
         {
             if (requestSpectateOnEnable)
             {
-                POVController.FullScreen.Spectate(this);
+                if (Spectating.SpectateController.FullScreen.IsAlive())
+                {
+                    Spectating.SpectateController.FullScreen!.Spectate(this);
+                }
+                else
+                {
+                    Debug.LogWarning("FullScreen SpectateController is not already available.");
+                }
             }
         }
     }

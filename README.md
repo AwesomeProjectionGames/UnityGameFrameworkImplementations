@@ -2,7 +2,7 @@
 A collection of systems that implement unified game interface from [Game Framework](https://github.com/AwesomeProjectionGames/GameFramework) in Unity.
 
 ## Modules implemented
-- **POV**: A Point of View (POV) spectate system implementation for GameFramework. Provides controllers and components for managing spectating functionality (not camera related).
+- **Spectating**: A spectate system implementation for GameFramework. Provides controllers and components for managing spectating functionality (UIs elements of a certain actor) and camera management.
 - **Spawn Point**: An implementation of Spawn Points using the Game Framework interfaces.
 
 ## Installation
@@ -12,7 +12,7 @@ Then select `Add package from git URL...` and enter the following URLs (only the
 
 ```
 https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/POV
-https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/SpawnPoint
+https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Spectating
 ```
 
 Or you can manually add the following line to your `manifest.json` file located in your project's `Packages` directory.
@@ -21,7 +21,7 @@ Or you can manually add the following line to your `manifest.json` file located 
 {
   "dependencies": {
     "com.awesomeprojection.gameframework.pov": "https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/POV",
-    "com.awesomeprojection.gameframework.spawnpoint": "https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/SpawnPoint"
+    "com.awesomeprojection.gameframework.spectating": "https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Spectating"
   }
 }
 ```

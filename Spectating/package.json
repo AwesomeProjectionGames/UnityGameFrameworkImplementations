@@ -1,0 +1,16 @@
+﻿{
+  "name": "com.awesomeprojection.gameframework.spectating",
+  "displayName": "Spectating (Game Framework)",
+  "description": "A spectate system implementation for GameFramework. Provides controllers and components for managing spectating functionality (UIs elements of a certain actor) and camera management.",
+  "version": "1.1.0",
+  "unity": "2021.3",
+  "author": {
+    "name": "Eliott Jaquier",
+    "email": "eliott.jaquier@gmail.com",
+    "url": "https://apgames.ch"
+  },
+  "dependencies": {
+    "com.awesomeprojection.gameframework": "1.0.0",
+    "com.awesomeprojection.coreutils": "1.0.0"
+  }
+}

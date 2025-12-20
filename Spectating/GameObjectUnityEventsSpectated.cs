@@ -1,10 +1,9 @@
 ﻿#nullable enable
 
-using AwesomeProjectionCoreUtils.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GameFramework.POV
+namespace GameFramework.Spectating
 {
     /// <summary>
     /// A simple MonoBehaviour that invokes UnityEvents when spectating starts and ends.

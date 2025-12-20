@@ -1,5 +1,5 @@
 {
-    "name": "GameFrameworkPOV",
+    "name": "GameFrameworkSpectating",
     "rootNamespace": "",
     "references": [
         "GUID:c383fce5c91930348b07e7bd63f0f5e9",
