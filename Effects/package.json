@@ -1,0 +1,16 @@
+﻿{
+  "name": "com.awesomeprojection.gameframework.effects",
+  "displayName": "Effects (Game Framework)",
+  "description": "An effects system implementation for GameFramework. Provides controllers and components for managing objects effects (gameplay / attributes) tied to actors and gameplay events.",
+  "version": "1.0.0",
+  "unity": "2021.3",
+  "author": {
+    "name": "Eliott Jaquier",
+    "email": "eliott.jaquier@gmail.com",
+    "url": "https://apgames.ch"
+  },
+  "dependencies": {
+    "com.awesomeprojection.gameframework": "1.0.0",
+    "com.awesomeprojection.coreutils": "1.0.0"
+  }
+}
