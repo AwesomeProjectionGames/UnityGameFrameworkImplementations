@@ -32,7 +32,7 @@ namespace GameFramework.Spectating
             StartCoroutine(TransitionCoroutine(cameraTarget, transitionSettings));
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if(_isTransitioning || CurrentCamera == null) return;
             CopyCamera(CurrentCamera);
