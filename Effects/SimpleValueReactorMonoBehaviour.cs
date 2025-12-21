@@ -1,4 +1,6 @@
 ﻿#nullable enable
+using System;
+using System.Linq;
 using AwesomeProjectionCoreUtils.Extensions;
 using UnityEngine;
 
@@ -13,6 +15,15 @@ namespace GameFramework.Effects
     {
         [SerializeField, Tooltip("Optional value source to observe.")]
         private IExposeSimpleValue<T>? _observedSource;
+        
+        [SerializeField]
+        [Tooltip("If no source is assigned, try to find one on Awake in object or parents")]
+        private bool tryAutoFindOnAwake = true;
+        
+        
+        [SerializeField]
+        [Tooltip("Channels name of a SimpleValue to observe automatically (if tryAutoFindOnAwake is true).")]
+        private string exposedSimpleValueChannelName = "";
 
         /// <summary>
         /// The source of the simple value to observe.
@@ -29,6 +40,21 @@ namespace GameFramework.Effects
                 var oldSource = _observedSource;
                 _observedSource = value;
                 OnObservedSourceChanged(oldSource, _observedSource);
+            }
+        }
+
+        protected void Awake()
+        {
+            if (tryAutoFindOnAwake && !_observedSource.IsAlive())
+            {
+                //Try to find the first matching source in this object or parents (with exposedSimpleValueChannelName)
+                var foundSource = GetComponentsInParent<IExposeSimpleValue<T>>()
+                    .FirstOrDefault(source => string.IsNullOrEmpty(exposedSimpleValueChannelName) ||
+                                              source.Name == exposedSimpleValueChannelName);
+                if (foundSource.IsAlive())
+                {
+                    ObservedSource = foundSource;
+                }
             }
         }
 
