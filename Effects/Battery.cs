@@ -27,7 +27,9 @@ namespace GameFramework.Effects
 
         public float ChargeRatePerSecond { get; set; }
 
-        public bool IsCharging => ChargeRatePerSecond > 0f;
+        public bool IsCharging => ChargeRatePerSecond > 0f && !IsFull;
+        public bool IsFull => CurrentCharge >= MaxCapacity;
+        public bool IsEmpty => CurrentCharge <= 0f;
 
         public float NormalizedCharge =>
             MaxCapacity <= 0f ? 0f : CurrentCharge / MaxCapacity;
