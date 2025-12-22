@@ -43,7 +43,7 @@ namespace GameFramework.Effects
             }
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             if (tryAutoFindOnAwake && !_observedSource.IsAlive())
             {
