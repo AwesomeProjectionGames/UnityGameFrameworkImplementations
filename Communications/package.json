@@ -1,8 +1,8 @@
 ﻿{
   "name": "com.awesomeprojection.gameframework.communications",
   "displayName": "Communications (Game Framework)",
-  "description": "An communication / bus event system implementation for GameFramework.",
-  "version": "1.0.0",
+  "description": "An communication / bus event system implementation and reactivity tools for GameFramework.",
+  "version": "1.1.0",
   "unity": "2021.3",
   "author": {
     "name": "Eliott Jaquier",
@@ -10,7 +10,7 @@
     "url": "https://apgames.ch"
   },
   "dependencies": {
-    "com.awesomeprojection.gameframework": "1.0.0",
+    "com.awesomeprojection.gameframework": "1.5.0",
     "com.awesomeprojection.coreutils": "1.0.0"
   }
 }
