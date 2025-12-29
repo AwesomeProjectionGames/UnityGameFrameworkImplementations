@@ -2,6 +2,7 @@
 A collection of systems that implement unified game interface from [Game Framework](https://github.com/AwesomeProjectionGames/GameFramework) in Unity.
 
 ## Modules implemented
+- **Core**: Core implementations of Game Framework interfaces for Unity, including base classes for actors, controllers, components, and other fundamental systems (but others systems can be used standalone without this package).
 - **Spectating**: A spectate system implementation for GameFramework. Provides controllers and components for managing spectating functionality (UIs elements of a certain actor) and camera management.
 - **Spawn Point**: An implementation of Spawn Points using the Game Framework interfaces.
 - **Effects**: Provides controllers and components for managing objects effects (gameplay / attributes) tied to actors and gameplay events.
@@ -13,6 +14,7 @@ To do so, open the Unity Package Manager and click on the `+` button in the top 
 Then select `Add package from git URL...` and enter the following URLs (only the ones you need):
 
 ```
+https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Core
 https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Spectating
 https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/SpawnPoint
 https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Effects
@@ -24,6 +26,7 @@ Or you can manually add the following line to your `manifest.json` file located 
 ```json
 {
   "dependencies": {
+    "com.awesomeprojection.gameframework.core": "https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Core",
     "com.awesomeprojection.gameframework.spectating": "https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Spectating",
     "com.awesomeprojection.gameframework.spawnpoint": "https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/SpawnPoint",
     "com.awesomeprojection.gameframework.effects": "https://github.com/AwesomeProjectionGames/UnityGameFrameworkImplementations.git?path=/Effects",
