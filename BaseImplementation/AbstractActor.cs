@@ -38,7 +38,7 @@ namespace UnityGameFrameworkImplementations.Core
         
         protected IActor? _owner;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             var allComponents = GetComponentsInChildren<IActorComponent>(true);
             AssignActorToComponents(allComponents); // all.Actor = this, including self
@@ -127,11 +127,16 @@ namespace UnityGameFrameworkImplementations.Core
         {
             
         }
-        
+
         /// <summary>
-        /// Called when any owner in parenting hierarchy changed
+        /// Called when any owner in parenting hierarchy changed.
+        /// Should be used to update network ownership-dependent logic (with (this as IActor).Controller?.Machine),
+        /// because the only one controller can own a chain of actors.
         /// </summary>
-        protected abstract void HandleAnyOwnerChange();
+        protected virtual void HandleAnyOwnerChange()
+        {
+            
+        }
         
         /// <summary>
         /// Compare two IHaveUUID, only by UUID string
