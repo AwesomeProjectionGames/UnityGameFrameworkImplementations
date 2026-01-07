@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Reflection;
+using AwesomeProjectionCoreUtils.Extensions;
 using GameFramework;
 using GameFramework.Dependencies;
 using UnityEngine;
 
-namespace NetworkSpecific
+namespace UnityGameFrameworkImplementations.BaseImplementation
 {
     /// <summary>
     /// Attribute to mark fields or properties for automatic injection from the Actor's components.
