@@ -103,6 +103,24 @@ namespace UnityGameFrameworkImplementations.BaseImplementation
         private static bool TryResolveDependency(IActor actor, Type targetType, out object? result)
         {
             result = actor.ComponentsContainer.GetComponent(targetType);
+            if(result == null)
+            {
+                // Try to get from the Actor itself
+                if (targetType.IsInstanceOfType(actor))
+                {
+                    result = actor;
+                }
+                else if(actor.Owner.IsAlive() && actor.Owner != actor)
+                {
+                    // Try to get from the Owner Actor (Parent)
+                    result = TryResolveDependency(actor.Owner, targetType, out var ownerResult) ? ownerResult : null;
+                }
+            }
+            if(result == null)
+            {
+                // Try to get from the global GameInstance
+                result = AbstractGameInstance.Instance.Services.GetComponent(targetType);
+            }
             return result != null;
         }
     }
