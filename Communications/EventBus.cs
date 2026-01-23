@@ -20,7 +20,7 @@ namespace UnityGameFrameworkImplementations.Communications
             _subscriptions = new Dictionary<Type, Delegate>(initialCapacity);
         }
 
-        public void Subscribe<T>(Action<T> handler) where T : struct
+        public void Subscribe<T>(Action<T> handler)
         {
             var type = typeof(T);
 
@@ -35,7 +35,7 @@ namespace UnityGameFrameworkImplementations.Communications
             }
         }
 
-        public void Unsubscribe<T>(Action<T> handler) where T : struct
+        public void Unsubscribe<T>(Action<T> handler)
         {
             var type = typeof(T);
 
@@ -56,7 +56,7 @@ namespace UnityGameFrameworkImplementations.Communications
             }
         }
 
-        public void Publish<T>(T eventItem) where T : struct
+        public void Publish<T>(T eventItem)
         {
             // HOT PATH: This method must be as lean as possible.
             
