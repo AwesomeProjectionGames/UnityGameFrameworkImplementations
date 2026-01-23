@@ -23,7 +23,6 @@ namespace UnityGameFrameworkImplementations.Core
     /// </summary>
     public abstract class AbstractActor : NetBehaviour, IActor
     {
-        public IActor Actor { get; set; } = null!; // Assigned to self when AssignActorToComponents (cause GetComponentsInChildren also get the GO)
         public Transform Transform => transform;
         public IEventBus EventDispatcher => _eventBus;
         public IComponentsContainer ComponentsContainer => _componentsContainer;
@@ -42,7 +41,7 @@ namespace UnityGameFrameworkImplementations.Core
         protected virtual void Awake()
         {
             var allComponents = GetComponentsInChildren<IActorComponent>(true);
-            AssignActorToComponents(allComponents); // all.Actor = this, including self
+            AssignActorToComponents(allComponents); // all.Actor = this
             _componentsContainer.RegisterComponents(allComponents);
         }
 
