@@ -9,6 +9,7 @@ using GameFramework.Dependencies;
 using GameFramework.Identification;
 using UnityEngine;
 using UnityGameFrameworkImplementations.Communications;
+using UnityGameFrameworkImplementations.Core.LowLevelEvents;
 
 namespace UnityGameFrameworkImplementations.Core
 {
@@ -110,14 +111,13 @@ namespace UnityGameFrameworkImplementations.Core
             }
         }
         
-        
         /// <summary>
         /// Called for everybody, when this actor gets owned by a new owner.
         /// </summary>
         /// <param name="newOwner">The new owner actor.</param>
         protected virtual void OnOwned(IActor newOwner)
         {
-            
+            //TODO: Raise event on owned (bool are we owner, IActor new owner)
         }
         
         /// <summary>
@@ -125,7 +125,16 @@ namespace UnityGameFrameworkImplementations.Core
         /// </summary>
         protected virtual void OnUnowned()
         {
-            
+            //TODO: Raise event on unowned (bool are we owner)
+        }
+
+        /// <summary>
+        /// For 'nested' ownership scenarios, signal that you want to give back ownership to the previous owner in the chain.
+        /// For example, exiting a vehicle could give back ownership to the player that owned the vehicle.
+        /// </summary>
+        public void GiveBackOwnership()
+        {
+            EventDispatcher.Publish(new OnActorWantsToGiveBackOwnershipEvent(this));
         }
 
         /// <summary>
