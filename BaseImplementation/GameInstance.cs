@@ -30,14 +30,13 @@ namespace UnityGameFrameworkImplementations.Core
 
         public IEventBus EventBus => _eventBus;
         public IComponentsContainer Services => _services;
-        public IGameMode? CurrentGameMode => _currentGameMode;
+        public IGameMode? CurrentGameMode { get; set; }
 
         #endregion
 
         private readonly DeferredEventBus _eventBus = new();
         private readonly ComponentsContainer _services = new();
         
-        private IGameMode? _currentGameMode;
 
         private void Awake()
         {
@@ -59,7 +58,7 @@ namespace UnityGameFrameworkImplementations.Core
         {
             if (Instance == this)
             {
-                _currentGameMode = null;
+                CurrentGameMode = null;
                 Instance = null;
             }
         }
