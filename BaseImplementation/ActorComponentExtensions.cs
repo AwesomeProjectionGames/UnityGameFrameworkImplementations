@@ -4,6 +4,7 @@ using AwesomeProjectionCoreUtils.Extensions;
 using GameFramework;
 using GameFramework.Dependencies;
 using UnityEngine;
+using UnityGameFrameworkImplementations.Core;
 
 namespace UnityGameFrameworkImplementations.BaseImplementation
 {
@@ -119,7 +120,7 @@ namespace UnityGameFrameworkImplementations.BaseImplementation
             if(result == null)
             {
                 // Try to get from the global GameInstance
-                result = AbstractGameInstance.Instance.Services.GetComponent(targetType);
+                result = GameInstance.Instance?.Services.GetComponent(targetType);
             }
             return result != null;
         }
