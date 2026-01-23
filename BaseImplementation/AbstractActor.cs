@@ -45,6 +45,11 @@ namespace UnityGameFrameworkImplementations.Core
             _componentsContainer.RegisterComponents(allComponents);
         }
 
+        protected virtual void Update()
+        {
+            _eventBus.Tick(Time.deltaTime);
+        }
+
         private void AssignActorToComponents(IActorComponent[] components)
         {
             foreach (var component in components)

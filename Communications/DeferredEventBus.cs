@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameFramework;
 using GameFramework.Bus;
 
 namespace UnityGameFrameworkImplementations.Communications
@@ -9,7 +10,7 @@ namespace UnityGameFrameworkImplementations.Communications
     /// Events published here are QUEUED and only executed when Update() is called (safely with try/catch for each event).
     /// Optimized to avoid boxing struct events.
     /// </summary>
-    public class DeferredEventBus : IEventBus
+    public class DeferredEventBus : IEventBus, ITickable
     {
         // ---------------------------------------------------------
         // Inner Logic: Type-Agnostic Queue Interface
@@ -148,21 +149,6 @@ namespace UnityGameFrameworkImplementations.Communications
             ((DeferredEventQueue<T>)buffer).Enqueue(eventItem);
         }
 
-        /// <summary>
-        /// Call this once per frame (e.g., in MonoBehaviour.Update).
-        /// This processes all queued events.
-        /// </summary>
-        public void Update()
-        {
-            // Iterate over all active queues and dispatch them.
-            // Note: The order of Types processed relies on Dictionary implementation details.
-            // However, the order of events *within* a Type is strictly FIFO.
-            foreach (var queue in _queues.Values)
-            {
-                queue.Dispatch(_subscriptions);
-            }
-        }
-
         public void Clear()
         {
             _subscriptions.Clear();
@@ -173,6 +159,21 @@ namespace UnityGameFrameworkImplementations.Communications
                 queue.Clear();
             }
             _queues.Clear();
+        }
+        
+        /// <summary>
+        /// Call this once per frame (e.g., in MonoBehaviour.Update).
+        /// This processes all queued events.
+        /// </summary>
+        public void Tick(float deltaTime)
+        {
+            // Iterate over all active queues and dispatch them.
+            // Note: The order of Types processed relies on Dictionary implementation details.
+            // However, the order of events *within* a Type is strictly FIFO.
+            foreach (var queue in _queues.Values)
+            {
+                queue.Dispatch(_subscriptions);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameFramework;
 using GameFramework.Bus;
 using GameFramework.Dependencies;
@@ -13,7 +14,7 @@ namespace UnityGameFrameworkImplementations.BaseImplementation
     {
         public static IGameInstance Instance { get; private set; }
 
-        private IEventBus _eventBus = new DeferredEventBus();
+        private DeferredEventBus _eventBus = new DeferredEventBus();
         private ComponentsContainer _services = new ComponentsContainer();
 
         public IEventBus EventBus => _eventBus;
@@ -38,6 +39,11 @@ namespace UnityGameFrameworkImplementations.BaseImplementation
             DontDestroyOnLoad(gameObject);
 
             _services.RegisterComponents(GetServices());
+        }
+
+        protected virtual void Update()
+        {
+            _eventBus.Tick(Time.deltaTime);
         }
 
         /// <summary>
