@@ -13,7 +13,7 @@ namespace UnityGameFrameworkImplementations.BaseImplementation
     {
         public static IGameInstance Instance { get; private set; }
 
-        private IEventBus _eventBus = new EventBus();
+        private IEventBus _eventBus = new DeferredEventBus();
         private ComponentsContainer _services = new ComponentsContainer();
 
         public IEventBus EventBus => _eventBus;

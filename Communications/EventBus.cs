@@ -7,6 +7,7 @@ namespace UnityGameFrameworkImplementations.Communications
     /// <summary>
     /// A fast implementation of IEventBus.
     /// Optimized for high-frequency publishing in a single-threaded context (e.g., Unity Main Thread).
+    /// When publishing events, it avoids allocations and minimizes indirections by CALLING DIRECTLY into typed delegates.
     /// </summary>
     public class EventBus : IEventBus
     {

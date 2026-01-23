@@ -6,10 +6,10 @@ using AwesomeProjectionCoreUtils.Extensions;
 using GameFramework;
 using GameFramework.Bus;
 using GameFramework.Dependencies;
+using GameFramework.Events;
 using GameFramework.Identification;
 using UnityEngine;
 using UnityGameFrameworkImplementations.Communications;
-using UnityGameFrameworkImplementations.Core.LowLevelEvents;
 
 namespace UnityGameFrameworkImplementations.Core
 {
@@ -32,7 +32,7 @@ namespace UnityGameFrameworkImplementations.Core
         public event Action? OnAnyOwnerChanged;
         public event Action? OnOwnerChanged;
         
-        private readonly EventBus _eventBus = new();
+        private readonly DeferredEventBus _eventBus = new();
         private readonly ComponentsContainer _componentsContainer = new();
         private readonly Dictionary<Type, IReadOnlyList<IActorComponent>> _componentCache = new Dictionary<Type, IReadOnlyList<IActorComponent>>();
         
@@ -116,7 +116,7 @@ namespace UnityGameFrameworkImplementations.Core
         /// <param name="newOwner">The new owner actor.</param>
         protected virtual void OnOwned(IActor newOwner)
         {
-            //TODO: Raise event on owned (bool are we owner, IActor new owner)
+            EventDispatcher.Publish(new OnActorOwnedEvent(this, IsOwner));
         }
         
         /// <summary>
@@ -124,7 +124,7 @@ namespace UnityGameFrameworkImplementations.Core
         /// </summary>
         protected virtual void OnUnowned()
         {
-            //TODO: Raise event on unowned (bool are we owner)
+            EventDispatcher.Publish(new OnActorUnownedEvent(this, IsOwner));
         }
 
         /// <summary>
