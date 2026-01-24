@@ -27,7 +27,8 @@ namespace UnityGameFrameworkImplementations.Communications
         /// <param name="observer">The subscriber.</param>
         /// <param name="currentValue">The current value to push immediately upon subscription.</param>
         /// <returns>A disposable that removes the observer from the list.</returns>
-        public static IDisposable SubscribeAndNotify<T>(this List<IObserver<T>> observers, IObserver<T> observer, T currentValue)
+        public static IDisposable SubscribeAndNotify<T>(this List<IObserver<T>> observers, IObserver<T> observer,
+            T currentValue)
         {
             if (!observers.Contains(observer))
             {
@@ -35,6 +36,8 @@ namespace UnityGameFrameworkImplementations.Communications
                 // Push the current value to the new subscriber immediately
                 observer.OnNext(currentValue);
             }
+
             return new Unsubscriber<T>(observers, observer);
         }
+    }
 }
