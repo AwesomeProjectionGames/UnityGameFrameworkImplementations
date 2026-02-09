@@ -29,7 +29,7 @@ namespace GameFramework.Spectating
         {
             if (isFullScreen)
             {
-                if(FullScreen != null)
+                if(FullScreen.IsAlive())
                 {
                     Debug.LogWarning("Multiple SpectateController instances detected. Overriding FullScreen instance.");
                 }
