@@ -14,15 +14,15 @@ namespace GameFramework.Spectating
     {
         public override bool IsActive
         {
-            get => _camera.enabled;
+            get => Camera.enabled;
             set
             {
-                if (_camera.enabled != value)
+                if (Camera.enabled != value)
                 {
-                    _camera.enabled = value;
-                    if (_audioListener != null)
+                    Camera.enabled = value;
+                    if (AudioListener != null)
                     {
-                        _audioListener.enabled = value;
+                        AudioListener.enabled = value;
                     }
                     OnActiveStateChanged.Invoke(value);
                 }
@@ -31,29 +31,38 @@ namespace GameFramework.Spectating
 
         public override float FieldOfView
         {
-            get => _camera.fieldOfView;
-            set => _camera.fieldOfView = value;
+            get => Camera.fieldOfView;
+            set => Camera.fieldOfView = value;
         }
 
         public override float NearClipPlane
         {
-            get => _camera.nearClipPlane;
-            set => _camera.nearClipPlane = value;
+            get => Camera.nearClipPlane;
+            set => Camera.nearClipPlane = value;
         }
 
         public override float FarClipPlane
         {
-            get => _camera.farClipPlane;
-            set => _camera.farClipPlane = value;
+            get => Camera.farClipPlane;
+            set => Camera.farClipPlane = value;
         }
         
-        private Camera _camera = null!;
-        private AudioListener? _audioListener;
+        private Camera Camera => _camera ??= GetComponent<Camera>();
 
-        private void Awake()
+        private AudioListener? AudioListener
         {
-            _camera = GetComponent<Camera>();
-            _audioListener = GetComponent<AudioListener>();
+            get
+            {
+                if (!_hasCheckedAudioListener)
+                {
+                    _audioListener = GetComponent<AudioListener>();
+                    _hasCheckedAudioListener = true;
+                }
+                return _audioListener;
+            }
         }
+        private Camera? _camera;
+        private AudioListener? _audioListener;
+        private bool _hasCheckedAudioListener = false;
     }
 }
