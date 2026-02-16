@@ -87,8 +87,9 @@ namespace GameFramework.Spectating
             _isTransitioning = false;
         }
 
-        void LerpCameras(ICamera fromCamera, ICamera toCamera, float t)
+        void LerpCameras(ICamera? fromCamera, ICamera? toCamera, float t)
         {
+            if (!toCamera.IsAlive() || !fromCamera.IsAlive()) return;
             _masterCamera.Transform.position = Vector3.Lerp(fromCamera.Transform.position, toCamera.Transform.position, t);
             _masterCamera.Transform.rotation = Quaternion.Slerp(fromCamera.Transform.rotation, toCamera.Transform.rotation, t);
             _masterCamera.FieldOfView = Mathf.Lerp(fromCamera.FieldOfView, toCamera.FieldOfView, t);
