@@ -27,7 +27,7 @@ namespace GameFramework.Spectating
         private void SetViewPort(Rect viewPort)
         {
             _viewPortRect = viewPort;
-            if (_masterCamera.IsAlive())
+            if (_masterCamera.IsValid())
             {
                 _masterCamera.Rect = _viewPortRect;
             }
@@ -36,7 +36,7 @@ namespace GameFramework.Spectating
         protected virtual void Awake()
         {
             _masterCamera = GetComponent<ICamera>();
-            if (!_masterCamera.IsAlive())
+            if (!_masterCamera.IsValid())
             {
                 Debug.LogError("No ICamera component found on the GameObject. Please add one to use VirtualCameraController.");
                 return;
@@ -72,7 +72,7 @@ namespace GameFramework.Spectating
         protected virtual void LateUpdate()
         {
             if (_isTransitioning) return;
-            CopyCamera(CurrentCamera);
+            _masterCamera.CopyFrom(CurrentCamera);
         }
 
         IEnumerator TransitionCoroutine(ICamera? fromCamera, ICamera cameraTarget, CameraTransitionSettings transitionSettings)
@@ -90,7 +90,7 @@ namespace GameFramework.Spectating
             
             if (transitionDuration < 0.01f)
             {
-                CopyCamera(cameraTarget);
+                _masterCamera.CopyFrom(cameraTarget);
                 _isTransitioning = false;
                 yield break;
             }
@@ -101,37 +101,14 @@ namespace GameFramework.Spectating
                 elapsedTime += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsedTime / transitionDuration);
                 
-                LerpCameras(fromCamera, cameraTarget, t);
+                _masterCamera.LerpFrom(fromCamera, cameraTarget, t);
                 yield return null;
             }
             
-            CopyCamera(cameraTarget);
+            _masterCamera.CopyFrom(cameraTarget);
             _isTransitioning = false;
         }
 
-        void LerpCameras(ICamera? fromCamera, ICamera? toCamera, float t)
-        {
-            if (fromCamera == null || !fromCamera.IsAlive() || toCamera == null || !toCamera.IsAlive()) return;
-            _masterCamera.Position = Vector3.Lerp(fromCamera.Position, toCamera.Position, t);
-            _masterCamera.Rotation = Quaternion.Slerp(fromCamera.Rotation, toCamera.Rotation, t);
-            _masterCamera.FieldOfView = Mathf.Lerp(fromCamera.FieldOfView, toCamera.FieldOfView, t);
-            _masterCamera.NearClipPlane = Mathf.Lerp(fromCamera.NearClipPlane, toCamera.NearClipPlane, t);
-            _masterCamera.FarClipPlane = Mathf.Lerp(fromCamera.FarClipPlane, toCamera.FarClipPlane, t);
-        }
-
-        /// <summary>
-        /// Copy everything from the source camera to the master camera, except Rect (so visual is same but maybe not in the same screen position/size).
-        /// </summary>
-        /// <param name="sourceCamera"></param>
-        void CopyCamera(ICamera? sourceCamera)
-        {
-            if (sourceCamera == null || !sourceCamera.IsAlive()) return;
-            _masterCamera.Position = sourceCamera.Position;
-            _masterCamera.Rotation = sourceCamera.Rotation;
-            _masterCamera.FieldOfView = sourceCamera.FieldOfView;
-            _masterCamera.NearClipPlane = sourceCamera.NearClipPlane;
-            _masterCamera.FarClipPlane = sourceCamera.FarClipPlane;
-        }
 
         private class SnapshotCamera : ICamera
         {
@@ -147,12 +124,7 @@ namespace GameFramework.Spectating
 
             public void CopyFrom(ICamera other)
             {
-                Position = other.Position;
-                Rotation = other.Rotation;
-                FieldOfView = other.FieldOfView;
-                NearClipPlane = other.NearClipPlane;
-                FarClipPlane = other.FarClipPlane;
-                Rect = other.Rect;
+                this.CopyFrom(other, true);
             }
         }
     }
