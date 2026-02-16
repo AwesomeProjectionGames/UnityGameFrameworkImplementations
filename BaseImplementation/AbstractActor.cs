@@ -96,14 +96,7 @@ namespace UnityGameFrameworkImplementations.Core
             {
                 newOwner.OnAnyOwnerChanged += HandleAnyOwnerChange;
             }
-            HandleAnyOwnerChange();
-        }
-        
-        /// <summary>
-        /// Fire OnAnyOwnerChanged and call OnOwned or OnUnowned depending on current owner state
-        /// </summary>
-        protected virtual void ProcessSafeOwnershipChange()
-        {
+            
             OnAnyOwnerChanged?.Invoke();
             if(_owner.IsAlive())
             {
@@ -113,6 +106,8 @@ namespace UnityGameFrameworkImplementations.Core
             {
                 OnUnowned();
             }
+            
+            HandleAnyOwnerChange();
         }
         
         /// <summary>
