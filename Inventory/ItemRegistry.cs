@@ -7,7 +7,7 @@ using GameFramework.Identification;
 using GameFramework.Inventory;
 using UnityEngine;
 
-namespace UnityGameFrameworkImplementations.BaseImplementation.Inventory
+namespace UnityGameFrameworkImplementations.Inventory
 {
     public class ItemRegistry : IItemRegistry
     {

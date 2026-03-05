@@ -5,9 +5,9 @@ using UnityEngine;
 using GameFramework;
 using GameFramework.Bus;
 using GameFramework.Dependencies;
-using UnityGameFrameworkImplementations.BaseImplementation.Inventory;
 using UnityGameFrameworkImplementations.Optimisation;
 using UnityGameFrameworkImplementations.Communications;
+using UnityGameFrameworkImplementations.Inventory;
 
 namespace UnityGameFrameworkImplementations.Core
 {

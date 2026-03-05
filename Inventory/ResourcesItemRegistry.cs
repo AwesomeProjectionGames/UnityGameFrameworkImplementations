@@ -2,7 +2,7 @@
 using GameFramework.Inventory;
 using UnityEngine;
 
-namespace UnityGameFrameworkImplementations.BaseImplementation.Inventory
+namespace UnityGameFrameworkImplementations.Inventory
 {
     /// <summary>
     /// A registry that loads items from Resources folders.

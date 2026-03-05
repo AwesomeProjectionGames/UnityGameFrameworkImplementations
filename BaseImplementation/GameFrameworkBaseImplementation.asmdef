@@ -7,7 +7,8 @@
         "GameFrameworkOptimisation",
         "GameFrameworkCommunications",
         "Mirror",
-        "Unity.Netcode.Runtime"
+        "Unity.Netcode.Runtime",
+        "GameFrameworkInventory"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
